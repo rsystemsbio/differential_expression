@@ -1,0 +1,19 @@
+#PBS -N IDBA Assemble        # job name
+#PBS -A #####             # account to which job is charged
+#PBS -l nodes=2:ppn=20           # number of nodes and cores per node required
+#PBS -l pmem=2gb                # memory per core
+#PBS -l walltime=8:00:00          # duration of the job (ex: 15 min)
+#PBS -j oe                      # combine output and error messages into 1 file
+#PBS -o idba.out       # output file name
+#PBS -m abe                     # event notification, set to email on start, end, or fail
+#PBS -M #####  # email to send notifications to
+
+#Enter the working directory
+cd #####
+
+#Load conda and conda environment
+module load anaconda3/2021.05
+conda activate metablomics-env
+
+#assemble sequences
+python ../../scripts/idba/idba.py -i ../../data/unmapped/ -o ../../data/assemblies
